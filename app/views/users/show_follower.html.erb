@@ -8,18 +8,23 @@
             <tr>
               <th>image:</th>
               <th>name:</th>
+              <th></th>
+              <th></th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
           <% @user.followers.each do |user| %>
           <table class= 'table'>
+            <tbody>
             <tr>
-              <td><%= attachment_image_tag(user, :profile_image, :fill, 100, 100, fallback: "no-image-icon.jpg") %></td>
-              <td><%= user.name %></td>
-              <td>フォロー数:<%= user.followings.count %></td>
-              <td>フォロワー数:<%= user.followers.count %></td>
-              <td><%= link_to 'show', user_path(user) %></td>
+              <th><%= attachment_image_tag(user, :profile_image, :fill, 100, 100, fallback: "no-image-icon.jpg") %></th>
+              <th><%= user.name %></th>
+              <th>フォロー数:<%= user.followings.count %></th>
+              <th>フォロワー数:<%= user.followers.count %></th>
+              <th><%= link_to 'show', user_path(user) %></th>
             </tr>
+            </tbody>
           </table>
         <% end %>
       <% end %>
