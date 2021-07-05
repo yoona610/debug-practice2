@@ -23,7 +23,7 @@
 </div>
 
 <div class='row'>
-  <% unless current_user == user %>
+<% unless current_user == user %>
   <% if current_user.following?(user) %>
     <%= form_with model: current_user.relationships.find_by(follow_id: user.id), method: :delete do |f| %>
       <%= hidden_field_tag :follow_id, user.id %>

@@ -4,11 +4,12 @@ class BooksController < ApplicationController
     @book = Book.find(params[:id])
     @newbook = Book.new
     @book_comment = BookComment.new
+    impressionist(@book, nil, unique: [:ip_address])
   end
 
   def index
-    @books = Book.all
     @book = Book.new
+    @ranks = Book.joins(:favorites).where(favorites: {created_at: 0.days.ago.prev_week..0.days.ago.prev_week(:sunday)}).group(:id).order("count(*) desc")
   end
 
   def create
@@ -46,6 +47,10 @@ class BooksController < ApplicationController
     @book = Book.find(params[:id])
     @book.destroy
     redirect_to books_path
+  end
+
+  def weekly_rank
+    @ranks = Book.last_week
   end
 
   private
