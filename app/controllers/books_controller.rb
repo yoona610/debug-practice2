@@ -9,7 +9,7 @@ class BooksController < ApplicationController
 
   def index
     @book = Book.new
-    @ranks = Book.joins(:favorites).where(favorites: {created_at: 0.days.ago.prev_week..0.days.ago.prev_week(:sunday)}).group(:id).order("count(*) desc")
+    @ranks = Book.this_week
   end
 
   def create

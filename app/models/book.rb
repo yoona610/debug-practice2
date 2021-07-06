@@ -7,6 +7,10 @@ class Book < ApplicationRecord
     favorites.where(user_id: user.id).exists?
   end
 
+  def self.this_week
+  	Book.joins(:favorites).where(favorites:{created_at: Date.today.beginning_of_week.. Date.today.beginning_of_week(:sunday)}).group(:id).order("count(*) desc")
+  end
+
   is_impressionable counter_cache: true
 
 	validates :title, presence: true
